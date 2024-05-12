@@ -4,6 +4,13 @@ from selenium.webdriver.common.keys import Keys
 import time
 import re
 import pandas as pd
+from job import Job
+
+
+job = Job("Software Developer", "New Jersey", "developer.csv")
+JOB_ROLE = job.role
+STATE = job.state
+FILE = job.file
 
 opt = webdriver.ChromeOptions()
 opt.add_experimental_option('detach', True)
@@ -12,16 +19,13 @@ driver.delete_all_cookies()
 
 url = 'https://www.indeed.com/'
 driver.get(url=url)
-
-
-
 job_title = driver.find_element(By.NAME, value="q")
-job_title.send_keys("Tech", Keys.ENTER)
+job_title.send_keys(JOB_ROLE, Keys.ENTER)
 time.sleep(0.5)
 driver.get(url=driver.current_url)
 location = driver.find_element(By.NAME, value="l")
 location.send_keys(Keys.CONTROL + "a")
-location.send_keys('New Jersey', Keys.ENTER)
+location.send_keys(STATE, Keys.ENTER)
 time.sleep(0.5)
 
 
@@ -68,9 +72,9 @@ for i in range(10):
     driver.get(url=new_url)
     time.sleep(2)
     get_list()
-df = pd.DataFrame(jobs, columns=['jobTitle','company','location','salary','shift','workTime'])
+df = pd.DataFrame(jobs, columns=['jobTitle','company','location','salary','shift','workTime', 'extra'])
 
-df.to_csv('techJobs.csv')
+df.to_csv(FILE)
     
 
 

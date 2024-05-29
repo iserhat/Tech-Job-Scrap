@@ -7,7 +7,7 @@ import pandas as pd
 from job import Job
 
 
-job = Job("Software Developer", "New Jersey", "developer.csv")
+job = Job("Analsyt", "New Jersey", "dataAnalyst.csv")
 JOB_ROLE = job.role
 STATE = job.state
 FILE = job.file
@@ -64,14 +64,14 @@ get_list()
 
 
 # the range of the "for loop" choosed as 5 for testing purpose. num_of_page can be used for getting all search results 
-for i in range(5):
+for i in range(8):
     pages = driver.find_elements(By.CSS_SELECTOR, 'nav ul li a')
     new_url = pages[-1].get_attribute('href')
     driver.get(url=new_url)
     time.sleep(2)
     get_list()
 
-df = pd.DataFrame(jobs, columns=['jobTitle','company','location','salary','shift','workTime', 'extra'])
+df = pd.DataFrame(jobs)
 df.to_csv(FILE)
     
 

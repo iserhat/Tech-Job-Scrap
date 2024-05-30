@@ -7,7 +7,7 @@ import pandas as pd
 from job import Job
 
 
-job = Job("Analsyt", "New Jersey", "dataAnalyst.csv")
+job = Job("developer", "New Jersey", "developer.csv")
 JOB_ROLE = job.role
 STATE = job.state
 FILE = job.file
